@@ -1,2 +1,2 @@
-# alsat
+# AlSat
 Commerce application for small business
