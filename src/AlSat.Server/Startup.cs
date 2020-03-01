@@ -3,6 +3,7 @@ using System.Text;
 
 using AlSat.Data.DAL;
 using AlSat.Data.Models;
+using AlSat.Server.Filters;
 using AlSat.Server.Helpers;
 using AlSat.Server.Services;
 
@@ -32,14 +33,17 @@ namespace AlSat.Server
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services
-				.AddDbContext<MainDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:MainDbCS"]))
-				;
+			.AddDbContext<MainDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:MainDbCS"]))
+			.AddDbContext<LogDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:LogDbCS"]))
+			;
 
 			services
 				.AddIdentity<User, Role>()
 				.AddEntityFrameworkStores<MainDbContext>()
 				.AddDefaultTokenProviders()
 				;
+
+			services.AddScoped<IUserService, UserService>();
 
 			services.Configure<IdentityOptions>(options =>
 			{
@@ -76,7 +80,10 @@ namespace AlSat.Server
 				options.SlidingExpiration = true;
 			});
 
-			services.AddControllers();
+			services.AddControllers(options =>
+			{
+				options.Filters.Add(typeof(ApiLoggingActionFilter));
+			});
 
 			// configure strongly typed settings objects
 			var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -102,9 +109,6 @@ namespace AlSat.Server
 					ValidateAudience = false
 				};
 			});
-
-			// configure DI for application services
-			services.AddScoped<IUserService, UserService>();
 
 			// Register the Swagger generator, defining 1 or more Swagger documents
 			services.AddSwaggerGen(c =>
@@ -160,6 +164,7 @@ namespace AlSat.Server
 			app.UseRouting();
 			app.UseAuthentication();
 			app.UseAuthorization();
+
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();

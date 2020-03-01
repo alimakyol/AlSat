@@ -7,7 +7,7 @@ namespace AlSat.Data.DAL
 {
 	public class MainDbContext : IdentityDbContext<User, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
 	{
-		public MainDbContext(DbContextOptions options) : base(options)
+		public MainDbContext(DbContextOptions<MainDbContext> options) : base(options)
 		{
 
 		}

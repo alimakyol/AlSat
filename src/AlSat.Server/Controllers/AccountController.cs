@@ -1,4 +1,6 @@
-﻿using AlSat.Server.Models;
+﻿using System;
+
+using AlSat.Server.Models;
 using AlSat.Server.Services;
 
 using Microsoft.AspNetCore.Authorization;
@@ -19,6 +21,9 @@ namespace AlSat.Server.Controllers
 		[HttpPost]
 		public IActionResult Login([FromBody]Login model)
 		{
+			if (model == null)
+				throw new ArgumentNullException(nameof(model));
+
 			UserInfo userInfo = mUserService.Authenticate(model.UserName, model.Password);
 
 			if (userInfo == null)
