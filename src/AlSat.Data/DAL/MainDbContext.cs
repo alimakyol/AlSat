@@ -1,11 +1,13 @@
-﻿using AlSat.Data.Models;
+﻿using System;
+
+using AlSat.Data.Models;
 
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace AlSat.Data.DAL
 {
-	public class MainDbContext : IdentityDbContext<User, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
+	public class MainDbContext : IdentityDbContext<User, Role, Guid, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
 	{
 		public MainDbContext(DbContextOptions<MainDbContext> options) : base(options)
 		{

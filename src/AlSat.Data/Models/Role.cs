@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System;
+
+using Microsoft.AspNetCore.Identity;
 
 namespace AlSat.Data.Models
 {
-	public class Role : IdentityRole<int>
+	public class Role : IdentityRole<Guid>
 	{
 	}
 }
