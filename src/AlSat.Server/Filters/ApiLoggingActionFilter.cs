@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Reflection;
 
-using AlSat.Data.BaseClasses;
+using AlSat.Server.Controllers;
 
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
@@ -25,7 +25,7 @@ namespace AlSat.Server.Filters
 		{
 			mStopwatch.Start();
 
-			if (context.Controller is ApiControllerBase controller)
+			if (context.Controller is BaseController controller)
 			{
 				MappedDiagnosticsContext.Set("controller", controller.ControllerContext.ActionDescriptor.ControllerName);
 				MappedDiagnosticsContext.Set("action", controller.ControllerContext.ActionDescriptor.ActionName);

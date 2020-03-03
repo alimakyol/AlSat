@@ -75,8 +75,8 @@ namespace AlSat.Server
 				options.Cookie.HttpOnly = true;
 				options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 
-				options.LoginPath = "/api/Account/Login";
-				options.AccessDeniedPath = "/api/Account/AccessDenied";
+				options.LoginPath = "/Account/Login";
+				options.AccessDeniedPath = "/Account/AccessDenied";
 				options.SlidingExpiration = true;
 			});
 
@@ -114,7 +114,7 @@ namespace AlSat.Server
 					{
 						var userService = context.HttpContext.RequestServices.GetRequiredService<IUserService>();
 
-						if (!userService.IsTokenValid(((JwtSecurityToken) context.SecurityToken).RawData))
+						if (!userService.IsTokenValid(((JwtSecurityToken)context.SecurityToken).RawData))
 							context.Fail("User is not recognized.");
 
 						return Task.CompletedTask;
@@ -157,7 +157,7 @@ namespace AlSat.Server
 			}
 			else
 			{
-				app.UseExceptionHandler("/Error");
+				app.UseExceptionHandler("/error");
 				app.UseHsts();
 			}
 
@@ -166,9 +166,9 @@ namespace AlSat.Server
 
 			// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
 			// specifying the Swagger JSON endpoint.
-			app.UseSwaggerUI(c =>
+			app.UseSwaggerUI(options =>
 			{
-				c.SwaggerEndpoint("/swagger/v1/swagger.json", "AlSat API V1");
+				options.SwaggerEndpoint("/swagger/v1/swagger.json", "AlSat API V1");
 			});
 
 			app.UseHttpsRedirection();
