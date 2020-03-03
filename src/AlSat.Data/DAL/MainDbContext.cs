@@ -16,6 +16,9 @@ namespace AlSat.Data.DAL
 		{
 			base.OnModelCreating(builder);
 
+			builder.Entity<User>().HasIndex(m => m.NormalizedUserName).IsUnique();
+			builder.Entity<User>().HasIndex(m => m.NormalizedEmail).IsUnique();
+
 			builder.Entity<User>().Property(m => m.RowVersion).IsConcurrencyToken();
 
 			//builder.Entity<Role>().ToTable("Role");
