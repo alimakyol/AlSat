@@ -331,5 +331,3 @@ ASALocalRun/
 
 # Secure files
 src/Alsat.Server/appsettings.Production.json
-
-/src/AlSat.Data/MigrationsLog

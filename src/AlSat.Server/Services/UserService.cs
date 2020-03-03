@@ -13,11 +13,11 @@ namespace AlSat.Server.Services
 {
 	public class UserService : IUserService
 	{
-		private readonly AppSettings _appSettings;
+		private readonly AppSettings mAppSettings;
 
 		public UserService(IOptions<AppSettings> appSettings)
 		{
-			_appSettings = appSettings.Value;
+			mAppSettings = appSettings.Value;
 		}
 
 		public UserInfo Authenticate(string username, string password)
@@ -32,7 +32,7 @@ namespace AlSat.Server.Services
 
 			// authentication successful so generate jwt token
 			var tokenHandler = new JwtSecurityTokenHandler();
-			var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+			var key = Encoding.ASCII.GetBytes(mAppSettings.Secret);
 			var tokenDescriptor = new SecurityTokenDescriptor
 			{
 				Subject = new ClaimsIdentity(new Claim[]
@@ -46,6 +46,13 @@ namespace AlSat.Server.Services
 			userInfo.Token = tokenHandler.WriteToken(token);
 
 			return userInfo;
+		}
+
+		public bool IsTokenValid(string token)
+		{
+			// TODO: Check user token to see if user changed password or user is disabled.
+
+			return true;
 		}
 	}
 }
