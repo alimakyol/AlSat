@@ -12,9 +12,6 @@ namespace AlSat.Server.Controllers
 		[HttpGet]
 		public IEnumerable<string> GetTest()
 		{
-			if (this.User != null)
-				throw new Exception("");
-
 			return new List<string> { "Str1", "Str2", "Str3" }.ToArray();
 		}
 
