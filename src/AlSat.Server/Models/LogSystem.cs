@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace AlSat.Data.Models
+namespace AlSat.Server.Models
 {
 	public class LogSystem
 	{

@@ -4,7 +4,7 @@ using System.Security.Claims;
 using System.Text;
 
 using AlSat.Server.Helpers;
-using AlSat.Server.Models;
+using AlSat.Server.VModels;
 
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

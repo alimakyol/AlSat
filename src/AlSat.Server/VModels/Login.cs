@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AlSat.Server.Models
+namespace AlSat.Server.VModels
 {
 	public class Login
 	{

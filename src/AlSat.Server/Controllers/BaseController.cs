@@ -1,4 +1,4 @@
-﻿using AlSat.Data.DAL;
+﻿using AlSat.Server.DAL;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +10,8 @@ namespace AlSat.Server.Controllers
 {
 	[Authorize]
 	[ApiController]
-	[Route("[controller]/[action]")]
+	////[Route("v{version:apiVersion}/[controller]")]
+	//[Route("api/v{version:apiVersion}/[controller]")]
 	public abstract class BaseController : ControllerBase
 	{
 		private MainDbContext _mainDbContext;

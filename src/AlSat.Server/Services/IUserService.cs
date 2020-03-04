@@ -1,4 +1,4 @@
-﻿using AlSat.Server.Models;
+﻿using AlSat.Server.VModels;
 
 namespace AlSat.Server.Services
 {

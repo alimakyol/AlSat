@@ -1,4 +1,4 @@
-﻿namespace AlSat.Data.Interfaces
+﻿namespace AlSat.Server.Interfaces
 {
 	public interface IAuditable
 	{

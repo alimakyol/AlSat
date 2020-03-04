@@ -1,9 +1,9 @@
 ﻿
-using AlSat.Data.Models;
+using AlSat.Server.Models;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace AlSat.Data.DAL
+namespace AlSat.Server.DAL
 {
 	public class MainDbContext : DbContext // IdentityDbContext<User, Role, Guid, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
 	{

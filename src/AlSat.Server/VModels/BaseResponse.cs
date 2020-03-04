@@ -1,6 +1,6 @@
 ﻿using AlSat.Server.Enums;
 
-namespace AlSat.Server.Models
+namespace AlSat.Server.VModels
 {
 	public class BaseResponse
 	{

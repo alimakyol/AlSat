@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-using AlSat.Data.Interfaces;
+using AlSat.Server.Interfaces;
 
-namespace AlSat.Data.Models
+namespace AlSat.Server.Models
 {
 	public class Localization : IAuditable
 	{

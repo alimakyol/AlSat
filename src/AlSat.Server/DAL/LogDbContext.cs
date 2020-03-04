@@ -1,10 +1,10 @@
 ﻿using System;
 
-using AlSat.Data.Models;
+using AlSat.Server.Models;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace AlSat.Data.DAL
+namespace AlSat.Server.DAL
 {
 	public class LogDbContext : DbContext
 	{

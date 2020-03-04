@@ -1,13 +1,15 @@
 ﻿using System;
 
-using AlSat.Server.Models;
 using AlSat.Server.Services;
+using AlSat.Server.VModels;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AlSat.Server.Controllers
 {
+	[ApiVersion("1.1")]
+	[Route("api/v{version:apiVersion}/[controller]/[action]")]
 	public class AccountController : BaseController
 	{
 		private IUserService mUserService;

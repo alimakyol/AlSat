@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-using AlSat.Data.DAL;
+using AlSat.Server.DAL;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AlSat.Server.Controllers
 {
+	[ApiVersion("1.1")]
+	[Route("api/v{version:apiVersion}/[controller]/[action]")]
 	public class HomeController : BaseController
 	{
 		[AllowAnonymous]

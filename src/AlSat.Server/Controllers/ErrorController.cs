@@ -1,25 +1,25 @@
-﻿using AlSat.Data.DAL;
-using AlSat.Server.Models;
+﻿using AlSat.Server.VModels;
 
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AlSat.Server.Controllers
 {
-  public class ErrorController : BaseController
-  {
-    [AllowAnonymous]
-    [Route("/error")]
-    public IActionResult Error()
-    {
-      BaseResponse response = new BaseResponse
-      {
-        Status = Enums.ResponseStatus.Error,
-        Message = "An error occured."
-      };
+	public class ErrorController : BaseController
+	{
+		[AllowAnonymous]
+		[Route("/error")]
+		[ApiExplorerSettings(IgnoreApi = true)]
+		[HttpGet]
+		public IActionResult Error()
+		{
+			BaseResponse response = new BaseResponse
+			{
+				Status = Enums.ResponseStatus.Error,
+				Message = "An error occured."
+			};
 
-      return Ok(response);
-    }
-  }
+			return Ok(response);
+		}
+	}
 }

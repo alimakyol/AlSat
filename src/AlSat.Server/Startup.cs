@@ -1,9 +1,11 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-using AlSat.Data.DAL;
+using AlSat.Server.DAL;
 using AlSat.Server.Filters;
 using AlSat.Server.Helpers;
 using AlSat.Server.Services;
@@ -11,12 +13,16 @@ using AlSat.Server.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
+
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace AlSat.Server
 {
@@ -32,6 +38,8 @@ namespace AlSat.Server
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddMvcCore();
+
 			services
 				.AddDbContext<LogDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:LogDbCS"]))
 				.AddDbContext<LocalizationDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:LocalizationDbCS"]))
@@ -81,11 +89,6 @@ namespace AlSat.Server
 				options.SlidingExpiration = true;
 			});
 
-			services.AddControllers(options =>
-			{
-				options.Filters.Add(typeof(ApiLoggingActionFilter));
-			});
-
 			// configure strongly typed settings objects
 			var appSettingsSection = Configuration.GetSection("AppSettings");
 			services.Configure<AppSettings>(appSettingsSection);
@@ -123,34 +126,43 @@ namespace AlSat.Server
 				};
 			});
 
-			// Register the Swagger generator, defining 1 or more Swagger documents
-			services.AddSwaggerGen(c =>
+			services.AddControllers(options =>
 			{
-				c.SwaggerDoc("v1",
-					new OpenApiInfo
-					{
-						Title = "AlSat API",
-						Version = "v1",
-						Description = "AlSat API documentation",
-						TermsOfService = new Uri("https://alsat.com/terms"),
-						Contact = new OpenApiContact
-						{
-							Name = "Alim Akyol",
-							Email = string.Empty,
-							Url = new Uri("https://twitter.com/AlimAkyol"),
-						},
-						License = new OpenApiLicense
-						{
-							Name = "Use under Proprietary license.",
-							Url = new Uri("https://alsat.com/license"),
-						}
-					}
-					);
+				options.Filters.Add(typeof(ApiLoggingActionFilter));
 			});
+
+			services.AddApiVersioning(
+					options =>
+					{
+						// reporting api versions will return the headers "api-supported-versions" and "api-deprecated-versions"
+						options.ReportApiVersions = true;
+					});
+			services.AddVersionedApiExplorer(
+					options =>
+					{
+						// add the versioned api explorer, which also adds IApiVersionDescriptionProvider service
+						// note: the specified format code will format the version as "'v'major[.minor][-status]"
+						options.GroupNameFormat = "'v'VVV";
+
+						// note: this option is only necessary when versioning by url segment. the SubstitutionFormat
+						// can also be used to control the format of the API version in route templates
+						options.SubstituteApiVersionInUrl = true;
+					});
+
+			services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+			services.AddSwaggerGen(
+					options =>
+					{
+						// add a custom operation filter which sets default values
+						options.OperationFilter<SwaggerDefaultValues>();
+
+						// integrate xml comments
+						//options.IncludeXmlComments(XmlCommentsFilePath);
+					});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
 		{
 			if (env.IsDevelopment())
 			{
@@ -162,26 +174,35 @@ namespace AlSat.Server
 				app.UseHsts();
 			}
 
-			// Enable middleware to serve generated Swagger as a JSON endpoint.
-			app.UseSwagger();
-
-			// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-			// specifying the Swagger JSON endpoint.
-			app.UseSwaggerUI(options =>
-			{
-				options.SwaggerEndpoint("/swagger/v1/swagger.json", "AlSat API V1");
-			});
-
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
 			app.UseRouting();
 			app.UseAuthentication();
 			app.UseAuthorization();
+			app.UseEndpoints(builder => builder.MapControllers());
+			app.UseSwagger();
+			app.UseSwaggerUI(
+					options =>
+					{
+						// build a swagger endpoint for each discovered API version
+						foreach (var description in provider.ApiVersionDescriptions)
+						{
+							string str = $"/swagger/{description.GroupName}/swagger.json";
+							string sr2 = description.GroupName.ToUpperInvariant();
 
-			app.UseEndpoints(endpoints =>
+							options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+						}
+					});
+		}
+
+		static string XmlCommentsFilePath
+		{
+			get
 			{
-				endpoints.MapControllers();
-			});
+				var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+				var fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
+				return Path.Combine(basePath, fileName);
+			}
 		}
 	}
 }
