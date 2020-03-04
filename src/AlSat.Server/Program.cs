@@ -8,7 +8,7 @@ using NLog.Web;
 
 namespace AlSat.Server
 {
-	public class Program
+	public static class Program
 	{
 		public static void Main(string[] args)
 		{

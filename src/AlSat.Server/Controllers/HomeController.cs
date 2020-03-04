@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using AlSat.Data.DAL;
 
 namespace AlSat.Server.Controllers
 {
@@ -12,7 +14,11 @@ namespace AlSat.Server.Controllers
 		[HttpGet]
 		public IEnumerable<string> GetTest()
 		{
-			return new List<string> { "Str1", "Str2", "Str3" }.ToArray();
+			Logger.Info("Gettest in home");
+
+			var users = MainDbContext.User.ToList();
+
+			return users.Select(m => m.UserName + " " + (m.Employees == null ? 0 : m.Employees.Count())).ToList();
 		}
 
 		[HttpGet]

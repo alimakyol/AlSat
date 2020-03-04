@@ -25,6 +25,8 @@ namespace AlSat.Server.Filters
 		{
 			mStopwatch.Start();
 
+			//context.Controller.GetType().
+
 			if (context.Controller is BaseController controller)
 			{
 				MappedDiagnosticsContext.Set("controller", controller.ControllerContext.ActionDescriptor.ControllerName);

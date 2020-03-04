@@ -9,7 +9,6 @@ namespace AlSat.Data.DAL
 	{
 		public MainDbContext(DbContextOptions<MainDbContext> options) : base(options)
 		{
-
 		}
 
 		protected override void OnModelCreating(ModelBuilder builder)
@@ -20,6 +19,8 @@ namespace AlSat.Data.DAL
 			builder.Entity<User>().HasIndex(m => m.NormalizedEmail).IsUnique();
 
 			builder.Entity<User>().Property(m => m.RowVersion).IsConcurrencyToken();
+
+			builder.Entity<User>().HasOne(m => m.Manager).WithMany(m => m.Employees).HasForeignKey(m => m.ManagerId).HasPrincipalKey(m => m.Id);
 
 			//builder.Entity<Role>().ToTable("Role");
 			//builder.Entity<RoleClaim>().ToTable("RoleClaim");

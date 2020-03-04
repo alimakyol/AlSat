@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AlSat.Data.Models
 {
 	public class User
 	{
 		public int Id { get; set; }
+		public int? ManagerId { get; set; }
 		public string UserName { get; set; }
 		public string NormalizedUserName { get; set; }
 		public string Email { get; set; }
@@ -14,9 +16,13 @@ namespace AlSat.Data.Models
 		public bool EmailConfirmed { get; set; }
 		public bool PhoneConfirmed { get; set; }
 		public string Token { get; set; }
-		public bool IsActive { get; set; }
+		public bool IsManager { get; set; }
+		public bool IsActive { get; set; } = true;
 
 		[Timestamp]
 		public byte[] RowVersion { get; set; }
+
+		public virtual User Manager { get; set; }
+		public virtual IList<User> Employees { get; set; }
 	}
 }
