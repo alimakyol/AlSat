@@ -33,8 +33,9 @@ namespace AlSat.Server
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services
-				.AddDbContext<MainDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:MainDbCS"]))
 				.AddDbContext<LogDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:LogDbCS"]))
+				.AddDbContext<LocalizationDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:LocalizationDbCS"]))
+				.AddDbContext<MainDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:MainDbCS"]))
 				;
 
 			//services

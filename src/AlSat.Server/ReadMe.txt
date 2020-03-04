@@ -12,6 +12,7 @@ add-migration <name> -c LogDbContext -Project AlSat.Data -StartupProject AlSat.S
 
 // Samples
 add-migration InitialCreate -c MainDbContext -Project AlSat.Data -StartupProject AlSat.Server -o MigrationsMain
+add-migration InitialCreate -c LogDbContext -Project AlSat.Data -StartupProject AlSat.Server -o MigrationsLog
 
 // To update databases, use below shell commands.
 update-database -c MainDbContext -Project AlSat.Data -StartupProject AlSat.Server

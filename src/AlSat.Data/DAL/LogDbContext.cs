@@ -13,6 +13,9 @@ namespace AlSat.Data.DAL
 
 		}
 
+		public DbSet<LogAudit> LogAudit { get; set; }
+		public DbSet<LogSystem> LogSystem { get; set; }
+
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			base.OnModelCreating(builder);

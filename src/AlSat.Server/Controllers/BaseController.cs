@@ -1,8 +1,9 @@
 ﻿using AlSat.Data.DAL;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+
 using NLog;
 
 namespace AlSat.Server.Controllers
