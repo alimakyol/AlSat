@@ -10,8 +10,6 @@ namespace AlSat.Server.Controllers
 {
 	[Authorize]
 	[ApiController]
-	////[Route("v{version:apiVersion}/[controller]")]
-	//[Route("api/v{version:apiVersion}/[controller]")]
 	public abstract class BaseController : ControllerBase
 	{
 		private MainDbContext _mainDbContext;

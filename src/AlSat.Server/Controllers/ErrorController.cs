@@ -5,11 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AlSat.Server.Controllers
 {
+	[ApiVersion("0.1")]
+	[ApiExplorerSettings(IgnoreApi = true)]
 	public class ErrorController : BaseController
 	{
 		[AllowAnonymous]
 		[Route("/error")]
-		[ApiExplorerSettings(IgnoreApi = true)]
 		[HttpGet]
 		public IActionResult Error()
 		{
