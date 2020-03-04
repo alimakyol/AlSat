@@ -24,7 +24,11 @@ namespace AlSat.Server.Controllers
 		[HttpGet]
 		public IEnumerable<string> GetTestAuth()
 		{
-			return new List<string> { "Str1", "Str2", "Str3" }.ToArray();
+			Logger.Info("Gettest in home (Authorized)");
+
+			var users = MainDbContext.User.ToList();
+
+			return users.Select(m => m.UserName + " " + (m.Employees == null ? 0 : m.Employees.Count())).ToList();
 		}
 	}
 }
