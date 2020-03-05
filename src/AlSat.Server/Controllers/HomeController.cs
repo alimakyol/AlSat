@@ -19,12 +19,6 @@ namespace AlSat.Server.Controllers
 		{
 			Logger.Info("Gettest in home");
 
-			string locTest = Localizer["Test Localization"];
-
-			var user = MainDbContext.User.FirstOrDefault(m => m.UserName == "aaa");
-			if (user == null)
-				throw new Exception("User not found");
-
 			var users = MainDbContext.User.ToList();
 
 			return users.Select(m => m.UserName + " " + (m.Employees == null ? 0 : m.Employees.Count())).ToList();
