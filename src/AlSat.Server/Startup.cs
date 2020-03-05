@@ -18,6 +18,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.IdentityModel.Tokens;
@@ -42,9 +43,10 @@ namespace AlSat.Server
 
 			services
 				.AddDbContext<LogDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:LogDbCS"]))
-				.AddDbContext<LocalizationDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:LocalizationDbCS"]))
 				.AddDbContext<MainDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:MainDbCS"]))
 				;
+
+			services.AddSingleton<Localizer>();
 
 			//services
 			//	.AddIdentity<User, Role>()

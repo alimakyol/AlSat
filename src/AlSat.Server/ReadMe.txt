@@ -7,16 +7,16 @@ or
 	Go to "File -> Settings"
 
 // To create migrations, use below shell commands.
-add-migration <name> -c MainDbContext -Project AlSat.Data -StartupProject AlSat.Server <!!-o MigrationsMain>
-add-migration <name> -c LogDbContext -Project AlSat.Data -StartupProject AlSat.Server <!!-o MigrationsLog>
+add-migration <name> -c MainDbContext <!!-o MigrationsMain>
+add-migration <name> -c LogDbContext <!!-o MigrationsLog>
 
 // Samples
-add-migration InitialCreate -c MainDbContext -Project AlSat.Data -StartupProject AlSat.Server -o MigrationsMain
-add-migration InitialCreate -c LogDbContext -Project AlSat.Data -StartupProject AlSat.Server -o MigrationsLog
+add-migration InitialCreate -c MainDbContext -o MigrationsMain
+add-migration InitialCreate -c LogDbContext -o MigrationsLog
 
 // To update databases, use below shell commands.
-update-database -c MainDbContext -Project AlSat.Data -StartupProject AlSat.Server
-update-database -c LogDbContext -Project AlSat.Data -StartupProject AlSat.Server
+update-database -c MainDbContext
+update-database -c LogDbContext
 
 // NLog
 To enable internal logging to find logging errors, modify nlog.config.

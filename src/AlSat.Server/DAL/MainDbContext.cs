@@ -32,5 +32,6 @@ namespace AlSat.Server.DAL
 		}
 
 		public DbSet<User> User { get; set; }
+		public DbSet<Localization> Localization { get; set; }
 	}
 }

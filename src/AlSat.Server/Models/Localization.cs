@@ -7,19 +7,15 @@ namespace AlSat.Server.Models
 {
 	public class Localization : IAuditable
 	{
-		[Key]
-		[Column(Order = 0)]
+		public int Id { get; set; }
+
 		[Required]
-		[StringLength(20)]
+		[StringLength(10)]
 		public string CultureCode { get; set; }
 
-		[Key]
-		[Column(Order = 1)]
 		[Required]
-		[StringLength(400)]
 		public string KeyText { get; set; }
 
-		[StringLength(1000)]
 		public string Translation { get; set; }
 
 		#region IAuditInfo Members
