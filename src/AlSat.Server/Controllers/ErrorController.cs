@@ -1,6 +1,10 @@
-﻿using AlSat.Server.VModels;
+﻿using System;
+using AlSat.Server.VModels;
 
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AlSat.Server.Controllers

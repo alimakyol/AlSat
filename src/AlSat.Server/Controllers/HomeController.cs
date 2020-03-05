@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using AlSat.Server.DAL;
@@ -19,6 +20,10 @@ namespace AlSat.Server.Controllers
 			Logger.Info("Gettest in home");
 
 			string locTest = Localizer["Test Localization"];
+
+			var user = MainDbContext.User.FirstOrDefault(m => m.UserName == "aaa");
+			if (user == null)
+				throw new Exception("User not found");
 
 			var users = MainDbContext.User.ToList();
 
