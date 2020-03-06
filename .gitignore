@@ -330,4 +330,4 @@ ASALocalRun/
 .mfractor/
 
 # Secure files
-src/Alsat.Server/appsettings.Production.json
+src/AlSat.Server/appsettings.Production.json

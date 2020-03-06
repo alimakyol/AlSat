@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlSat.Server.MigrationsMain
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20200305202840_InitialCreate")]
+    [Migration("20200306041155_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
