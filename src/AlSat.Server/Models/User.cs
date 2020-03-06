@@ -16,6 +16,8 @@ namespace AlSat.Server.Models
 		[StringLength(100)]
 		public string NormalizedUserName { get; set; }
 
+		public bool IsActive { get; set; } = true;
+
 		[Required]
 		[StringLength(100)]
 		public string Email { get; set; }
@@ -40,7 +42,6 @@ namespace AlSat.Server.Models
 		public string Token { get; set; }
 
 		public bool IsManager { get; set; }
-		public bool IsActive { get; set; } = true;
 
 		[Timestamp]
 		public byte[] RowVersion { get; set; }
