@@ -14,7 +14,6 @@ namespace AlSat.Server.Filters
 	public class ApiLoggingActionFilter : IActionFilter
 	{
 		private readonly ILogger<ApiLoggingActionFilter> mLogger = null;
-		//private const string StopwatchKey = "Stopwatch";
 		Stopwatch mStopwatch = new Stopwatch();
 
 		public ApiLoggingActionFilter(ILogger<ApiLoggingActionFilter> logger)

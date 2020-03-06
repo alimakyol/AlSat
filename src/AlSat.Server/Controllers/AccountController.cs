@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AlSat.Server.Controllers
 {
 	[ApiVersion("0.1")]
-	[Route("api/v{version:apiVersion}/[controller]/[action]")]
+	[Route("v{version:apiVersion}/[controller]/[action]")]
 	public class AccountController : BaseController
 	{
 		private IUserService mUserService;
