@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AlSat.Server.Models
@@ -6,11 +7,13 @@ namespace AlSat.Server.Models
 	public class User
 	{
 		public int Id { get; set; }
-		public int? ManagerId { get; set; }
+		public int BusinessId { get; set; }
 
 		[Required]
 		[StringLength(100)]
 		public string UserName { get; set; }
+
+		public Guid PrivateGuid { get; set; } = Guid.NewGuid();
 
 		[Required]
 		[StringLength(100)]

@@ -6,9 +6,15 @@ namespace AlSat.Server.Models
 	{
 		public int Id { get; set; }
 
+		public int BusinessId { get; set; }
+
 		[Required]
 		[StringLength(100)]
 		public string Name { get; set; }
+
+		[Required]
+		[StringLength(100)]
+		public string NormalizedName { get; set; }
 
 		public bool IsActive { get; set; } = true;
 		public decimal PurchasePrice { get; set; }
@@ -21,5 +27,7 @@ namespace AlSat.Server.Models
 
 		[Timestamp]
 		public byte[] RowVersion { get; set; }
+
+		public virtual Business Business { get; set; }
 	}
 }
