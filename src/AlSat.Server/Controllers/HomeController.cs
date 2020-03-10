@@ -20,7 +20,7 @@ namespace AlSat.Server.Controllers
 
 			var users = MainDbContext.User.ToList();
 
-			return users.Select(m => m.UserName + " " + (m.Employees == null ? 0 : m.Employees.Count())).ToList();
+			return users.Select(m => m.PhoneNumber).ToList();
 		}
 
 		[HttpGet]
@@ -30,7 +30,7 @@ namespace AlSat.Server.Controllers
 
 			var users = MainDbContext.User.ToList();
 
-			return users.Select(m => m.UserName + " " + (m.Employees == null ? 0 : m.Employees.Count())).ToList();
+			return users.Select(m => m.PhoneNumber).ToList();
 		}
 	}
 }

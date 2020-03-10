@@ -15,8 +15,6 @@ namespace AlSat.Server.DAL
 		{
 			base.OnModelCreating(builder);
 
-			builder.Entity<User>().HasIndex(m => m.NormalizedUserName).IsUnique();
-			builder.Entity<User>().HasIndex(m => m.NormalizedEmail).IsUnique();
 			builder.Entity<User>().Property(m => m.RowVersion).IsConcurrencyToken();
 
 			//builder.Entity<User>().HasOne(m => m.Manager).WithMany(m => m.Employees).HasForeignKey(m => m.ManagerId).HasPrincipalKey(m => m.Id);

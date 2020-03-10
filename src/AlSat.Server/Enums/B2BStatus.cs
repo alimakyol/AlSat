@@ -2,7 +2,9 @@
 {
 	public enum B2BStatus
 	{
+		Requested,
 		Active,
-		Passive
+		Canceled,
+		Rejected
 	}
 }
