@@ -4,9 +4,13 @@ import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import Login from "./screens/LoginScreen";
+import Login from './screens/LoginScreen';
+// import AppNavigator from './navigation/AppNavigator';
 
-import AppNavigator from './navigation/AppNavigator';
+// import { Config } from './Config';
+
+// console.log(Config);
+// console.log(Config.url.API_URL);
 
 export default function App(props) {
 	const [isLoadingComplete, setLoadingComplete] = useState(false);
