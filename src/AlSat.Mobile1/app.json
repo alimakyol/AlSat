@@ -1,9 +1,8 @@
 {
   "expo": {
-    "name": "Tab Navigation Template",
-    "slug": "AlSatMobileTest",
+    "name": "AlSat",
+    "slug": "alsat-mobile",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
       "android",
@@ -12,7 +11,6 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
